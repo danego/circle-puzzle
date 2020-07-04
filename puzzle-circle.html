@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Circle Puzzle</title>
+    <script src="mechanics.js" defer></script>
+    <link rel="stylesheet" href="puzzle-circle.css" type="text/css">
+
+  </head>
+  <body>
+    <h1>Let's solve this puzzle w/ brute force and pretty CSS!</h1>
+
+    <section class="circle-puzzle">
+      <div class="layer-one">
+        <div class="line"></div>
+        <span>A  &nbsp B <br>C</span>
+
+        <div class="layer-two">
+          <div class="line"></div>
+          <span>A  &nbsp B <br>C</span>
+
+          <div class="layer-three">
+            <div class="line"></div>
+            <span>A  &nbsp B <br>C</span>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Straight Row Representation -->
+    <p> Let'ts try a straight row representation. Note, the ends wrap around.</p>
+    <section class="rows-puzzle">
+      <div class="row-0">
+        <div><span class="green">G</span></div>
+        <div><span class="green">G</span></div>
+        <div><span class="green">G</span></div>
+        <div><span class="purple">P</span></div>
+        <div><span class="purple">P</span></div>
+        <div><span class="purple">P</span></div>
+        <div><span class="green">G</span></div>
+        <div><span class="green">G</span></div>
+        <div><span class="purple">P</span></div>
+        <div><span class="purple">P</span></div>
+      </div>
+
+      <div class="row-1">
+        <div>
+          <span class="green">G</span> <br>
+          <span class="orange">O</span>
+          <span class="green">G</span>
+        </div>
+        <div>
+          <span class="green">G</span> <br>
+          <span class="purple">P</span>
+          <span class="orange">O</span>
+        </div>
+        <div>
+          <span class="green">G</span> <br>
+          <span class="green">G</span>
+          <span class="purple">P</span>
+        </div>
+        <div>
+          <span class="green">G</span> <br>
+          <span class="purple">P</span>
+          <span class="purple">P</span>
+        </div>
+        <div>
+          <span class="green">G</span> <br>
+          <span class="orange">O</span>
+          <span class="orange">O</span>
+        </div>
+        <div>
+          <span class="purple">P</span> <br>
+          <span class="purple">P</span>
+          <span class="orange">O</span>
+        </div>
+        <div>
+          <span class="purple">P</span> <br>
+          <span class="orange">O</span>
+          <span class="purple">P</span>
+        </div>
+        <div>
+          <span class="purple">P</span> <br>
+          <span class="green">G</span>
+          <span class="purple">P</span>
+        </div>
+        <div>
+          <span class="purple">P</span> <br>
+          <span class="orange">O</span>
+          <span class="green">G</span>
+        </div>
+        <div>
+          <span class="purple">P</span> <br>
+          <span class="green">G</span>
+          <span class="green">G</span>
+        </div>
+      </div>
+
+      <div class="row-2">
+        <div>
+          <span class="green">G</span>
+          <span class="purple">P</span> <br>
+          <span class="orange">O</span>
+        </div>
+        <div>
+          <span class="orange">O</span>
+          <span class="green">G</span> <br>
+          <span class="purple">P</span>
+        </div>
+        <div>
+          <span class="purple">P</span>
+          <span class="orange">O</span> <br>
+          <span class="purple">P</span>
+        </div>
+        <div>
+          <span class="orange">O</span>
+          <span class="purple">P</span> <br>
+          <span class="green">G</span>
+        </div>
+        <div>
+          <span class="green">G</span>
+          <span class="orange">O</span> <br>
+          <span class="orange">O</span>
+        </div>
+        <div>
+          <span class="purple">P</span>
+          <span class="green">G</span> <br>
+          <span class="green">G</span>
+        </div>
+        <div>
+          <span class="purple">P</span>
+          <span class="orange">O</span> <br>
+          <span class="green">G</span>
+        </div>
+        <div>
+          <span class="orange">O</span>
+          <span class="orange">O</span> <br>
+          <span class="purple">P</span>
+        </div>
+        <div>
+          <span class="purple">P</span>
+          <span class="purple">P</span> <br>
+          <span class="green">G</span>
+        </div>
+        <div>
+          <span class="green">G</span>
+          <span class="green">G</span> <br>
+          <span class="orange">O</span>
+        </div>
+      </div>
+
+      <div class="row-3">
+        <div>
+          <span class="orange">O</span>
+          <span class="purple">P</span> 
+        </div>
+        <div>
+          <span class="purple">P</span>
+          <span class="green">G</span>
+        </div>
+        <div>
+          <span class="orange">O</span>
+          <span class="green">G</span>
+        </div>
+        <div>
+          <span class="green">G</span>
+          <span class="purple">P</span> 
+        </div>
+        <div>
+          <span class="green">G</span>
+          <span class="orange">O</span>
+        </div>
+      </div>
+    </section>
+
+    <p><span> Caterpillar </span> <span class="colorBlock">MothMan</span></p>
+  </body>
+</html>

@@ -1,0 +1,121 @@
+body {
+        
+}
+.layer-one {
+  height: 500px;
+  width: 500px;
+  margin: 0 auto;
+  background-color: red;
+  border: 1px black solid;
+  border-radius: 50%;
+  position: relative;
+}
+.layer-two {
+  height: 400px;
+  width: 400px;
+  background-color: blue;
+  border: 1px black dashed;
+  border-radius: 50%;
+  position: relative;
+  top: 10%;
+  left: 10%;
+
+}
+.layer-three {
+  height: 300px;
+  width: 300px;
+  background-color: green;
+  border: 1px black dashed;
+  border-radius: 50%;
+  position: absolute;
+  top: 10%;
+  left: 10%;
+}
+.line {
+  width: 99%;
+  border: 2px solid black;
+  position: relative;
+  top: 50%;
+}
+section.circle-puzzle span {
+  display: block;
+  transform: rotate(-0.20turn);
+  position: absolute;
+  top: 43%;
+  left: 2%;
+  text-align: center;
+  background-color: blueviolet;
+}
+
+/* Straight Rows CSS */
+/* General Styling for all rows */
+.rows-puzzle {
+  width: 100%;
+  background-color: #999999;
+}
+
+.row-3, .row-2, .row-1, .row-0 {
+  background-color: #999999;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+
+.row-3 div, .row-2 div, .row-1 div, .row-0 div {
+  border: 2px solid black;
+  border-collapse: collapse;
+  margin: 0 3px;
+  background-color: #bdbaba;
+}
+
+
+section.rows-puzzle span{
+  display: inline-block;
+  border: 1px solid #222222;
+  padding: 1em;
+}
+
+.green {
+  background-color: forestgreen;
+  background-image: url(noise.png);
+}
+.purple {
+  background-image: url(noise.png);
+  background-color: rebeccapurple;
+}
+.orange {
+  background-color: orange;
+  background-image: url(noise.png);
+}
+
+/* Row-Specific Styling */
+.row-0 {
+  margin-left: 5%;
+}
+
+.row-1 span:nth-of-type(1) {
+  margin-left: 25%;
+}
+.row-1 {
+  margin-left: 5%;
+}
+
+.row-2 span:nth-of-type(3) {
+  margin-left: 25%;
+}
+.row-2 {
+  margin-right: 5%;
+}
+
+
+.row-3 {
+  margin-left: 1.5%;
+  margin-right: 5%;
+}
+.row-3>div {
+  margin: 0 10px;
+}
+.row-3 span:nth-of-type(1) {
+  margin-right: 60px;
+  /*margin: 0 10px;*/
+}
