@@ -51,20 +51,23 @@ section.circle-puzzle span {
 /* General Styling for all rows */
 .rows-puzzle {
   width: 100%;
-  background-color: #999999;
+  /*background-color: #999999;*/
 }
 
-.row-3, .row-2, .row-1, .row-0 {
+.row-2, .row-1, .row-0 {
   background-color: #999999;
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-between;
+  justify-content: space-around;
+}
+.row-3 {
+  background-color: #999999;
 }
 
 .row-3 div, .row-2 div, .row-1 div, .row-0 div {
   border: 2px solid black;
   border-collapse: collapse;
-  margin: 0 3px;
+  margin: 0 0px;
   background-color: #bdbaba;
 }
 
@@ -72,18 +75,18 @@ section.circle-puzzle span {
 section.rows-puzzle span{
   display: inline-block;
   border: 1px solid #222222;
-  padding: 1em;
+  padding: 1em .75em;
 }
 
-.green {
+.G {
   background-color: forestgreen;
   background-image: url(noise.png);
 }
-.purple {
+.P {
   background-image: url(noise.png);
   background-color: rebeccapurple;
 }
-.orange {
+.O {
   background-color: orange;
   background-image: url(noise.png);
 }
@@ -109,11 +112,19 @@ section.rows-puzzle span{
 
 
 .row-3 {
-  margin-left: 1.5%;
-  margin-right: 5%;
+  margin-left: 10%;
+  margin-right: ;
 }
 .row-3>div {
-  margin: 0 10px;
+  margin-right: 60px;
+  margin-left: 30px;
+  display: inline-block;
+}
+.row-3 div:nth-of-type(1) {
+  margin-left: 50px;
+}
+.row-3 div:last-of-type {
+  margin-right: 0px;
 }
 .row-3 span:nth-of-type(1) {
   margin-right: 60px;
