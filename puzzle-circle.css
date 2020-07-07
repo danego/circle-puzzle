@@ -1,43 +1,68 @@
 body {
         
 }
-.layer-one {
-  height: 500px;
-  width: 500px;
-  margin: 0 auto;
-  background-color: red;
+
+#buttons {
+  background-color: #777777;
+  border: gray dotted 2px;
+  width: 200px;
+  height: 150px;
+  position: fixed;
+  top: 100px;
+  left: 20px;
+}
+
+/* Circle Layout Styling */
+/* General (circle shapes) */ 
+.circle-puzzle {
+  height: 800px;
+  width: 800px;
+  background-color: #999999;
   border: 1px black solid;
   border-radius: 50%;
   position: relative;
+  top: 50%;
+  left: 50%;
+  margin: 0 0 0 -400px;
+}
+.layer-one {
+  height: 700px;
+  width: 700px;
+  margin: 0 auto;
+  background-color: #666666;
+  border: 1px black solid;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -350px 0 0 -350px;
 }
 .layer-two {
-  height: 400px;
-  width: 400px;
-  background-color: blue;
+  height: 500px;
+  width: 500px;
+  background-color: #444444;
   border: 1px black dashed;
   border-radius: 50%;
-  position: relative;
-  top: 10%;
-  left: 10%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -250px 0 0 -250px;
 
 }
 .layer-three {
   height: 300px;
   width: 300px;
-  background-color: green;
+  background-color: #222;
   border: 1px black dashed;
   border-radius: 50%;
   position: absolute;
-  top: 10%;
-  left: 10%;
-}
-.line {
-  width: 99%;
-  border: 2px solid black;
-  position: relative;
   top: 50%;
+  left: 50%;
+  margin: -150px 0 0 -150px;
 }
-section.circle-puzzle span {
+
+/*
+section.circle-puzzle div {
   display: block;
   transform: rotate(-0.20turn);
   position: absolute;
@@ -46,7 +71,311 @@ section.circle-puzzle span {
   text-align: center;
   background-color: blueviolet;
 }
+*/
+/* Div Rotation Styling*/
+/* Div Rotation Layer-Zero*/
+.layer-zero .r0 {
+  transform: rotate(-0.19turn);
+  position: absolute; 
+  top: 29%;
+  left: 4%;
+}
+.layer-zero .r1 {
+  transform: rotate(-0.09turn);
+  position: absolute; 
+  top: 8%;
+  left: 22%;
+}
+.layer-zero .r2 {
+  position: absolute; 
+  top: 0%;
+  left: 47%;
+}
+.layer-zero .r3 {
+  transform: rotate(0.09turn);
+  position: absolute; 
+  top: 8%;
+  right: 22%;
+}
+.layer-zero .r4 {
+  transform: rotate(0.19turn);
+  position: absolute; 
+  top: 29%;
+  right: 4%;
+}
+.layer-zero .r5 {
+  transform: rotate(-0.69turn);
+  position: absolute; 
+  bottom: 29%;
+  right: 4%;
+}
+.layer-zero .r6 {
+  transform: rotate(-0.596turn);
+  position: absolute; 
+  bottom: 9%;
+  right: 20%;
+}
+.layer-zero .r7 {
+  transform: rotate(.5turn);
+  position: absolute; 
+  bottom: 0%;
+  left: 48%;
+}
+.layer-zero .r8 {
+  transform: rotate(.596turn);
+  position: absolute; 
+  bottom: 9%;
+  left: 20%;
+}
+.layer-zero .r9 {
+  transform: rotate(.69turn);
+  position: absolute; 
+  bottom: 29%;
+  left: 4%;
+}
 
+
+.layer-one .r0 {
+  transform: rotate(-0.19turn);
+  position: absolute; 
+  top: 30%;
+  left: -3%;
+}
+.layer-one .r1 {
+  transform: rotate(-0.10turn);
+  position: absolute; 
+  top: 9%;
+  left: 13%;
+}
+.layer-one .r2 {
+  position: absolute; 
+  top: 1%;
+  left: 37.5%;
+}
+.layer-one .r3 {
+  transform: rotate(0.1turn);
+  position: absolute; 
+  top: 9%;
+  right: 13%;
+}
+.layer-one .r4 {
+  transform: rotate(0.19turn);
+  position: absolute; 
+  top: 30%;
+  right: -3%;
+}
+.layer-one .r5 {
+  transform: rotate(-0.69turn);
+  position: absolute; 
+  bottom: 30%;
+  right: -3%;
+}
+.layer-one .r6 {
+  transform: rotate(-0.596turn);
+  position: absolute; 
+  bottom: 9%;
+  right: 13%;
+}
+.layer-one .r7 {
+  transform: rotate(.5turn);
+  position: absolute; 
+  bottom: 1%;
+  left: 37.5%;
+}
+.layer-one .r8 {
+  transform: rotate(.596turn);
+  position: absolute; 
+  bottom: 9%;
+  left: 13%;
+}
+.layer-one .r9 {
+  transform: rotate(.69turn);
+  position: absolute; 
+  bottom: 30%;
+  left: -3%;
+}
+
+/* Div Rotation layer-two*/
+.layer-two .r0 {
+  transform: rotate(-.25turn);
+  position: absolute; 
+  top: 43%;
+  left: 3%;
+}
+.layer-two .r1 {
+  transform: rotate(-.14turn);
+  position: absolute; 
+  top: 17%;
+  left: 13%;
+}
+.layer-two .r2 {
+  transform: rotate(-.04turn);
+  position: absolute; 
+  top: 4%;
+  left: 33%;
+}
+.layer-two .r3 {
+  transform: rotate(.04turn);
+  position: absolute; 
+  top: 4%;
+  right: 33%;
+}
+.layer-two .r4 {
+  transform: rotate(.14turn);
+  position: absolute; 
+  top: 17%;
+  right: 13%;
+}
+.layer-two .r5 {
+  transform: rotate(.25turn);
+  position: absolute; 
+  top: 43%;
+  right: 3%;
+}
+.layer-two .r6 {
+  transform: rotate(-.64turn);
+  position: absolute; 
+  bottom: 17%;
+  right: 13%;
+}
+.layer-two .r7 {
+  transform: rotate(.46turn);
+  position: absolute; 
+  bottom: 4%;
+  right: 33%;
+}
+.layer-two .r8 {
+  transform: rotate(-.46turn);
+  position: absolute; 
+  bottom: 4%;
+  left: 33%;
+}
+.layer-two .r9 {
+  transform: rotate(.64turn);
+  position: absolute; 
+  bottom: 17%;
+  left: 13%;
+}
+/* Div Rotation layer-three*/
+.layer-three .r0 {
+  transform: rotate(-0.09turn);
+  position: absolute; 
+  top: 10%;
+  left: 12%;
+}
+.layer-three .r1 {
+  transform: rotate(0.09turn);
+  position: absolute; 
+  top: 10%;
+  right: 12%;
+}
+.layer-three .r2 {
+  transform: rotate(-0.69turn);
+  position: absolute; 
+  bottom: 29%;
+  right: -3%;
+}
+.layer-three .r3 {
+  transform: rotate(.5turn);
+  position: absolute; 
+  bottom: 3%;
+  left: 33%;
+}
+.layer-three .r4 {
+  transform: rotate(.69turn);
+  position: absolute; 
+  bottom: 29%;
+  left: -3%;
+}
+
+/* Layer-Specific Visual Styling */
+.layer-zero div {
+  border: 2px solid black;
+  border-collapse: collapse;
+  margin: 0 0px;
+  background-color: #bdbaba;
+  width: 40px;
+}
+.layer-zero span {
+  display: block;
+  border: 1px solid #222222;
+  padding: .65em .75em;
+}
+
+/* Layer One Elements, Visual */
+.layer-one>div {
+  border: 2px solid black;
+  border-collapse: collapse;
+  border-top-left-radius: 30%;
+  border-top-right-radius: 30%;
+  border-bottom-left-radius: 20%;
+  border-bottom-right-radius: 20%;
+  margin: 0 0px;
+  background-color: #bdbaba;
+  /*width: 65px; */
+  width: 170px;
+  display: block;
+}
+.layer-one span{
+  display: inline-block;
+  border: 1px solid #222222;
+  /*padding: .5em;*/
+  padding: .5em 2.15em;
+  /*border-radius: 50%;*/
+}
+.layer-one span {
+  border-radius: 50%;
+}
+.layer-one span:nth-of-type(1) {
+  border-radius: 0%;
+  margin-left: 25%;
+}
+
+/* Layer Two Elements */
+.layer-two>div {
+  border: 2px solid black;
+  border-collapse: collapse;
+  border-top-left-radius: 30%;
+  border-top-right-radius: 30%;
+  margin: 0 0px;
+  background-color: #bdbaba;
+  width: 65px;
+  display: block;
+}
+.layer-two span{
+  display: inline-block;
+  border: 1px solid #222222;
+  padding: .5em;
+  border-radius: 50%;
+}
+.layer-two span:nth-of-type(3) {
+  margin-left: 25%;
+}
+
+/* Layer Three Visuals*/
+.layer-three>div {
+  border: 2px solid black;
+  border-collapse: collapse;
+  border-top-left-radius: 30%;
+  border-top-right-radius: 30%;
+  margin: 0 0px;
+  background-color: #bdbaba;
+  width: 100px;
+  display: flex;
+  justify-content: space-between;
+}
+.layer-three span {
+  display: inline-block;
+  border: 1px solid #222222;
+  padding: .5em;
+  border-radius: 50%;
+}
+.layer-three span:nth-of-type(1) {
+  margin-right: 20px;
+  /*margin: 0 10px;*/
+}
+
+/*********************************************/
 /* Straight Rows CSS */
 /* General Styling for all rows */
 .rows-puzzle {
@@ -113,7 +442,6 @@ section.rows-puzzle span{
 
 .row-3 {
   margin-left: 10%;
-  margin-right: ;
 }
 .row-3>div {
   margin-right: 60px;

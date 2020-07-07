@@ -53,8 +53,12 @@ bankAvlblPuzzlePieces[3] = [{left:'P', right:'G', simpleNum: 0},
 
 
 //for perfect fit scenario (only calls from successful row3Perm)                            
-let solvedPuzzlePieces = new Array(3);
+//let solvedPuzzlePieces = new Array(3);
+const allSolvedPuzzlePieces = new Array();
+
 function cementSolvedArray() {
+
+  let solvedPuzzlePieces = new Array(3);
   solvedPuzzlePieces[0] = new Array(10);
   solvedPuzzlePieces[1] = new Array(10);
   solvedPuzzlePieces[2] = new Array(5);
@@ -67,10 +71,29 @@ function cementSolvedArray() {
   for (let i = 0; i < 5; i++) {
     solvedPuzzlePieces[2][i] = bankAvlblPuzzlePieces[3][i].simpleNum;
   }
-  console.log(solvedPuzzlePieces[0]);
-  console.log(solvedPuzzlePieces[1]);
-  console.log(solvedPuzzlePieces[2]);
-  displayPuzzleHtml();
+
+  //returns true if its a new soln array
+  function doesNotExistYet() {
+    for (let i = 0; i < allSolvedPuzzlePieces.length; i++) {
+      for (let j = 0; j < 10; j++) {
+        if (allSolvedPuzzlePieces[i][0][j] !== solvedPuzzlePieces[0][j]) return true;
+        if (allSolvedPuzzlePieces[i][1][j] !== solvedPuzzlePieces[1][j]) return true;
+      }
+      for (let x = 0; x < 5; x++) {
+        if (allSolvedPuzzlePieces[i][2][x] !== solvedPuzzlePieces[2][x]) return true;
+      }
+    }
+    return false;
+  }
+
+  if (allSolvedPuzzlePieces.length === 0) {
+    allSolvedPuzzlePieces.push(solvedPuzzlePieces);
+    displayPuzzleHtml();
+  }
+  else if (doesNotExistYet()) {
+    allSolvedPuzzlePieces.push(solvedPuzzlePieces);
+    displayPuzzleHtml();
+    }
 }
 
 function setUpDOMPropertyArr() {
@@ -88,6 +111,24 @@ function setUpDOMPropertyArr() {
   // row 3
   for(let i = 0; i < 5; i++) {
     arrPuzzlePieces[3][i].dom = rowsHtml[3].children[i];
+  }
+}
+
+function setUpDOMPropertyArrCircle() {
+
+  const circleHtml = document.getElementById('circle-puzzle');
+  const layersHtml = circleHtml.children;
+  //layer 1 - note: layer 0 doesn't change, so no need to link
+  for(let i = 0; i < 10; i++) {
+    arrPuzzlePieces[1][i].domCircle = layersHtml[1].children[i];
+  }
+  //layer 2
+  for(let i = 0; i < 10; i++) {
+    arrPuzzlePieces[2][i].domCircle = layersHtml[2].children[i];
+  }
+  //layer 3
+  for(let i = 0; i < 5; i++) {
+    arrPuzzlePieces[3][i].domCircle = layersHtml[3].children[i];
   }
 }
 
@@ -142,6 +183,56 @@ function displayPuzzleHtmlThree() {
     arrPuzzlePieces[3][i].dom.children[1].className = bankAvlblPuzzlePieces[3][i].right;
   }
 }
+//circleHtml Varieties
+function displayCircleHtmlOne() { 
+  //change text of dom elements to match ^ (ie no switching, rewriting arrPP)
+  //update class to change color
+  //note - no updating arrPP bc already done in other display()
+
+  //layer1
+  for(let i = 0; i < 10; i++) {
+    //note - children[1] is <br>
+    arrPuzzlePieces[1][i].domCircle.children[0].textContent = bankAvlblPuzzlePieces[1][i].top;
+    arrPuzzlePieces[1][i].domCircle.children[0].className = bankAvlblPuzzlePieces[1][i].top;
+
+    arrPuzzlePieces[1][i].domCircle.children[2].textContent = bankAvlblPuzzlePieces[1][i].left;
+    arrPuzzlePieces[1][i].domCircle.children[2].className = bankAvlblPuzzlePieces[1][i].left;
+
+    arrPuzzlePieces[1][i].domCircle.children[3].textContent = bankAvlblPuzzlePieces[1][i].right;
+    arrPuzzlePieces[1][i].domCircle.children[3].className = bankAvlblPuzzlePieces[1][i].right;
+  }
+}
+function displayCircleHtmlTwo() {
+  // layer 2
+  for(let i = 0; i < 10; i++) {
+    //note - children[1] is <br>
+    arrPuzzlePieces[2][i].domCircle.children[0].textContent = bankAvlblPuzzlePieces[2][i].left;
+    arrPuzzlePieces[2][i].domCircle.children[0].className = bankAvlblPuzzlePieces[2][i].left;
+
+    arrPuzzlePieces[2][i].domCircle.children[1].textContent = bankAvlblPuzzlePieces[2][i].right;
+    arrPuzzlePieces[2][i].domCircle.children[1].className = bankAvlblPuzzlePieces[2][i].right;
+
+    arrPuzzlePieces[2][i].domCircle.children[3].textContent = bankAvlblPuzzlePieces[2][i].bottom;
+    arrPuzzlePieces[2][i].domCircle.children[3].className = bankAvlblPuzzlePieces[2][i].bottom;
+  }
+}
+function displayCircleHtmlThree() {
+   // layer 3
+   for(let i = 0; i < 5; i++) {
+    //note - children[1] is <br>
+    arrPuzzlePieces[3][i].domCircle.children[0].textContent = bankAvlblPuzzlePieces[3][i].left;
+    arrPuzzlePieces[3][i].domCircle.children[0].className = bankAvlblPuzzlePieces[3][i].left;
+
+    arrPuzzlePieces[3][i].domCircle.children[1].textContent = bankAvlblPuzzlePieces[3][i].right;
+    arrPuzzlePieces[3][i].domCircle.children[1].className = bankAvlblPuzzlePieces[3][i].right;
+  }
+}
+
+function displayCircleHtml() {
+  displayCircleHtmlOne();
+  displayCircleHtmlTwo();
+  displayCircleHtmlThree();
+}
 
 //update (move around) html pieces after correct solution
 function displayPuzzleHtml() { 
@@ -152,6 +243,50 @@ function displayPuzzleHtml() {
  displayPuzzleHtmlOne();
  displayPuzzleHtmlTwo();
  displayPuzzleHtmlThree();
+
+ displayCircleHtml();
+}
+
+//update bankAvlblPP to soln passed in
+//then call displayPuzzleHtml() to update arrPP and HTML
+function displayNewSolutionHtml(solnIndex) {
+  //row 1
+  for (let i = 0; i < 10; i++) {
+    //if bankAvlbl piece is already in position, skip to next index
+    //if not equal, run through bankAvlbl[] to find match & switch
+    if ((bankAvlblPuzzlePieces[1][i].simpleNum !== allSolvedPuzzlePieces[solnIndex][0][i])) {
+      for (let j = i; j < 10; j++) {
+        if (bankAvlblPuzzlePieces[1][j].simpleNum === allSolvedPuzzlePieces[solnIndex][0][i]) {
+          switchRow(i, j, 1);
+        }
+      }
+    }
+  }
+  //row 2
+  for (let i = 0; i < 10; i++) {
+    //if bankAvlbl piece is already in position, skip to next index
+    //if not equal, run through bankAvlbl[] to find match & switch
+    if ((bankAvlblPuzzlePieces[2][i].simpleNum !== allSolvedPuzzlePieces[solnIndex][1][i])) {
+      for (let j = i; j < 10; j++) {
+        if (bankAvlblPuzzlePieces[2][j].simpleNum === allSolvedPuzzlePieces[solnIndex][1][i]) {
+          switchRow(i, j, 2);
+        }
+      }
+    }
+  }
+  //row 3
+  for (let i = 0; i < 5; i++) {
+    //if bankAvlbl piece is already in position, skip to next index
+    //if not equal, run through bankAvlbl[] to find match & switch
+    if ((bankAvlblPuzzlePieces[3][i].simpleNum !== allSolvedPuzzlePieces[solnIndex][2][i])) {
+      for (let j = i; j < 5; j++) {
+        if (bankAvlblPuzzlePieces[3][j].simpleNum === allSolvedPuzzlePieces[solnIndex][2][i]) {
+          switchRow(i, j, 3);
+        }
+      }
+    }
+  }
+  displayPuzzleHtml();
 }
 
 
@@ -163,7 +298,6 @@ function fitsRowOne(indexToCheck, puzzlePiece) {
   //console.log(arrPuzzlePieces[0][indexToCheck] + puzzlePiece.top);
   if (arrPuzzlePieces[0][indexToCheck] === puzzlePiece.top) {
 
-    //console.log('fit on spot ' + indexToCheck);
     return true;
   }
   else {
@@ -188,17 +322,12 @@ function fitsRowTwo(indexToCheck, puzzlePiece) {
     rowOneRightIndex = indexToCheck;
   }
 
-  //console.log('l: ' + rowOneLeftIndex + ', r: ' + rowOneRightIndex);
-  //console.log('1. ' + bankAvlblPuzzlePieces[1][rowOneLeftIndex].right + ' == 2. ' + puzzlePiece.left);
-  //console.log('1. ' + bankAvlblPuzzlePieces[1][rowOneRightIndex].left + ' == 2. ' + puzzlePiece.right);
   if (bankAvlblPuzzlePieces[1][rowOneLeftIndex].right === puzzlePiece.left && bankAvlblPuzzlePieces[1][rowOneRightIndex].left === puzzlePiece.right) {
     
-    //console.log('row 2 fit @ ' + indexToCheck);
     return true;
   }
   else {
     
-    //console.log("no go senor");
     return false;
   }
 }
@@ -231,7 +360,6 @@ function fitsRowThree(indexToCheck, puzzlePiece) {
 
   if (bankAvlblPuzzlePieces[2][rowTwoLeftIndex].bottom === puzzlePiece.left && bankAvlblPuzzlePieces[2][rowTwoRightIndex].bottom === puzzlePiece.right) {
     
-    //console.log('fit on spot ' + indexToCheck);
     return true;
   }
   else {
@@ -256,17 +384,17 @@ function switchRow(switchSpotIdx, toSwitchInIdx, rowNum) {
 
 //takes two numbers and record of current array setup (to reset the bankAvlbl)
 function row1Perm(switchSpot, toSwitchIn, simpleNumArray) {
-  console.log('Row1: ' + switchSpot + " <-" + toSwitchIn);
+  //console.log('Row1: ' + switchSpot + " <-" + toSwitchIn);
 
   //default set to true - sets false if 1.doesn't fit | 2.no more perms
   let hasAvlblBranches = true;
 
   //reset bankAvlblPuzzlePieces[] to match simpleNumArray
-  for (let i = 0; i < 9; i++) {
+  for (let i = 0; i < 10; i++) {
     //if bankAvlbl piece is already in position, skip to next index
     //if not equal, run through bankAvlbl[] to find match & switch
     if ((bankAvlblPuzzlePieces[1][i].simpleNum !== simpleNumArray[i])) {
-      for (let j = i; j < 9; j++) {
+      for (let j = i; j < 10; j++) {
         if (bankAvlblPuzzlePieces[1][j].simpleNum === simpleNumArray[i]) {
           switchRow(i, j, 1);
         }
@@ -288,9 +416,8 @@ function row1Perm(switchSpot, toSwitchIn, simpleNumArray) {
     if (switchSpot === 8) {
       hasAvlblBranches = false;
       if (fitsRowOne(9, bankAvlblPuzzlePieces[1][9])) {
-        console.log('      row 1 fits!');
+        //console.log('      row 1 fits!');
         let simpleNumArray2 = [0,1,2,3,4,5,6,7,8,9];
-        //displayPuzzleHtmlOne();
         if (row2Perm(0,0,simpleNumArray2)) {
           return true;
         }
@@ -300,7 +427,7 @@ function row1Perm(switchSpot, toSwitchIn, simpleNumArray) {
   //on root case, but no fit. Move to next switch immediately
   else if (switchSpot === 0) {
     if (toSwitchIn === 9) {
-      console.log('1 No available pieces, break out');
+      //console.log('1 No available pieces, break out');
     }
     else {
       toSwitchIn ++;
@@ -314,7 +441,6 @@ function row1Perm(switchSpot, toSwitchIn, simpleNumArray) {
     hasAvlblBranches = false;
   }
 
-  //console.log(simpleNumArray);
   if (hasAvlblBranches) {
     //explore all lower branches
     let newSwitchSpot = switchSpot + 1;
@@ -328,17 +454,17 @@ function row1Perm(switchSpot, toSwitchIn, simpleNumArray) {
 
 //takes two numbers and record of current array setup (to reset the bankAvlbl)
 function row2Perm(switchSpot, toSwitchIn, simpleNumArray) {
-  console.log('Row2: ' + switchSpot + " <-" + toSwitchIn);
+  //console.log('Row2: ' + switchSpot + " <-" + toSwitchIn);
 
   //default set to true - sets false if 1.doesn't fit | 2.no more perms
   let hasAvlblBranches = true;
 
   //reset bankAvlblPuzzlePieces[] to match simpleNumArray
-  for (let i = 0; i < 9; i++) {
+  for (let i = 0; i < 10; i++) {
     //if bankAvlbl piece is already in position, skip to next index
     //if not equal, run through bankAvlbl[] to find match & switch
     if ((bankAvlblPuzzlePieces[2][i].simpleNum !== simpleNumArray[i])) {
-      for (let j = i; j < 9; j++) {
+      for (let j = i; j < 10; j++) {
         if (bankAvlblPuzzlePieces[2][j].simpleNum === simpleNumArray[i]) {
           switchRow(i, j, 2);
         }
@@ -360,8 +486,7 @@ function row2Perm(switchSpot, toSwitchIn, simpleNumArray) {
     if (switchSpot === 8) {
       hasAvlblBranches = false;
       if (fitsRowTwo(9, bankAvlblPuzzlePieces[2][9])) {
-        console.log('     row 2 fits!');
-        //displayPuzzleHtmlTwo();
+        //console.log('     row 2 fits!');
         let simpleNumArray3 = [0,1,2,3,4];
         if (row3Perm(0,0,simpleNumArray3)) {
           return true;
@@ -372,7 +497,7 @@ function row2Perm(switchSpot, toSwitchIn, simpleNumArray) {
   //on root case, but no fit. Move to next switch immediately
   else if (switchSpot === 0) {
     if (toSwitchIn === 9) {
-      console.log('2 No available pieces, break out');
+      //console.log('2 No available pieces, break out');
     }
     else {
       toSwitchIn ++;
@@ -386,7 +511,6 @@ function row2Perm(switchSpot, toSwitchIn, simpleNumArray) {
     hasAvlblBranches = false;
   }
 
-  //console.log(simpleNumArray);
   if (hasAvlblBranches) {
     //explore all lower branches
     let newSwitchSpot = switchSpot + 1;
@@ -403,7 +527,7 @@ function row2Perm(switchSpot, toSwitchIn, simpleNumArray) {
 //just perm all Row 3 
 //takes two numbers
 function row3Perm(switchSpot, toSwitchIn, simpleNumArray) {
-  console.log(switchSpot + " <--" + toSwitchIn);
+  //console.log(switchSpot + " <--" + toSwitchIn);
 
   //default set to true - sets false if 1.doesn't fit | 2.no more perms
   let hasAvlblBranches = true;
@@ -436,7 +560,6 @@ function row3Perm(switchSpot, toSwitchIn, simpleNumArray) {
       hasAvlblBranches = false;
       if (fitsRowThree(4, bankAvlblPuzzlePieces[3][4])) {
         console.log('     perfect fit!');
-        //displayPuzzleHtmlThree();
         cementSolvedArray();
         return true;
       }
@@ -445,7 +568,7 @@ function row3Perm(switchSpot, toSwitchIn, simpleNumArray) {
   //on root case, but no fit. Move to next switch immediately
   else if (switchSpot === 0) {
     if (toSwitchIn === 4) {
-      console.log('No available pieces, break out');
+      //console.log('No available pieces, break out');
     }
     else {
       toSwitchIn ++;
@@ -473,17 +596,37 @@ function row3Perm(switchSpot, toSwitchIn, simpleNumArray) {
 }//end of row3Perm()
 
 
-//TESTING Section: 
-console.log(arrPuzzlePieces);
-console.log(arrPuzzlePieces[1][2].left);
+//HTML and eventHandlers Section
+function setUpButtons() {
 
-//fitsRowOne(0, arrPuzzlePieces[1][4]);
-//fitsRowTwo(4, arrPuzzlePieces[2][2]);
+  const selectButton = document.getElementById('soln-number');
+  for (let i = 0; i < allSolvedPuzzlePieces.length; i++) {
+    let option = document.createElement('option');
+    option.setAttribute('value', i);
+    option.textContent = i;
+    selectButton.appendChild(option);
+  }
+
+  selectButton.onchange = function() {
+    const solutionNum = selectButton.value;
+    displayNewSolutionHtml(solutionNum);
+  };
+}
+
+
+//TESTING Section: 
+/* 
+NOTE: 
+- cementSolvedArray() has a duplicate problem; couldnt solve it 
+*/
+
+setUpDOMPropertyArr();
+setUpDOMPropertyArrCircle();
 
 console.log('STARTED');
-setUpDOMPropertyArr();
 let simpleNumArray = [0,1,2,3,4,5,6,7,8,9];
 row1Perm(0,0,simpleNumArray);
 
 console.log('COMPLETED');
+setUpButtons();
 
