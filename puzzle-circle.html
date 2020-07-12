@@ -11,13 +11,36 @@
     <h1>Let's solve this puzzle w/ brute force and pretty CSS!</h1>
 
     <section id="buttons">
-      <div>Hello!</div>
+      <div><strong>Controls:</strong></div>
+      <div id="soln-generator">
+        <hr>
+        <label for="generate-small">Generate subsets of solutions:</label>
+        <div>
+          <input type="button" id="generate-small" value="small">
+          <input type="button" id="generate-large" value="large">
+        </div>
+      </div>
+
+      <!--Radio buttons to switch between subsets after they've been generated-->
+      <fieldset>
+        <legend>Subset Size</legend>
+        <ul>
+          <li>
+            <label for="small-soln">Display small subset</label>
+            <input type="radio" id="small-soln" name="subset" value="S" disabled>
+          </li>
+          <li>
+            <label for="large-soln">Display large subset</label>
+            <input type="radio" id="large-soln" name="subset" value="L" disabled>
+          </li>
+        </ul>
+      </fieldset>
+
       <hr>
-      <label for="soln-number">Select solution #:</label>
+      <label for="soln-number">Select <abbr title="Note: This is only a sample of solutions (2nd row permutations are limited).">solution</abbr> #: &nbsp</label>
       <select id="soln-number">
 
       </select>
-      <hr>
     </section>
 
     <section class="circle-puzzle" id="circle-puzzle">

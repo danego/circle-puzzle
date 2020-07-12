@@ -1,16 +1,35 @@
-body {
-        
+html {
+  /* maybe for using rem ...*/
+  /*font-size: 10;*/
 }
 
+/* Buttons & Control Panel */
 #buttons {
   background-color: #777777;
-  border: gray dotted 2px;
+  border: #d6d5d5 solid 2px;
+  padding: 3px;
+  padding-bottom: 9px;
   width: 200px;
-  height: 150px;
+  height: auto;
   position: fixed;
   top: 100px;
   left: 20px;
+  z-index: 2;
 }
+#soln-generator div{
+  display: flex;
+  justify-content: space-around;
+}
+fieldset ul {
+  margin: 2px auto 0px auto;
+}
+#buttons abbr {
+  text-decoration: none;
+  border-bottom: 2px dotted black;
+}
+
+
+
 
 /* Circle Layout Styling */
 /* General (circle shapes) */ 
@@ -92,10 +111,10 @@ section.circle-puzzle div {
   left: 47%;
 }
 .layer-zero .r3 {
-  transform: rotate(0.09turn);
+  transform: rotate(0.095turn);
   position: absolute; 
-  top: 8%;
-  right: 22%;
+  top: 8.5%;
+  right: 21%;
 }
 .layer-zero .r4 {
   transform: rotate(0.19turn);
@@ -319,9 +338,8 @@ section.circle-puzzle div {
 .layer-one span{
   display: inline-block;
   border: 1px solid #222222;
-  /*padding: .5em;*/
   padding: .5em 2.15em;
-  /*border-radius: 50%;*/
+
 }
 .layer-one span {
   border-radius: 50%;
@@ -340,12 +358,14 @@ section.circle-puzzle div {
   margin: 0 0px;
   background-color: #bdbaba;
   width: 65px;
+  /*width: 70px;*/
   display: block;
 }
 .layer-two span{
   display: inline-block;
   border: 1px solid #222222;
   padding: .5em;
+  /*padding: .6em;*/
   border-radius: 50%;
 }
 .layer-two span:nth-of-type(3) {
@@ -380,7 +400,7 @@ section.circle-puzzle div {
 /* General Styling for all rows */
 .rows-puzzle {
   width: 100%;
-  /*background-color: #999999;*/
+  background-color: #999999;
 }
 
 .row-2, .row-1, .row-0 {

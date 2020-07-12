@@ -53,10 +53,11 @@ bankAvlblPuzzlePieces[3] = [{left:'P', right:'G', simpleNum: 0},
 
 
 //for perfect fit scenario (only calls from successful row3Perm)                            
-//let solvedPuzzlePieces = new Array(3);
-const allSolvedPuzzlePieces = new Array();
+// aSPPS array is filled up first. Large only used 
+const allSolvedPuzzlePiecesSmall = new Array();
+const allSolvedPuzzlePiecesLarge = new Array();
 
-function cementSolvedArray() {
+function cementSolvedArray(solnSubset) {
 
   let solvedPuzzlePieces = new Array(3);
   solvedPuzzlePieces[0] = new Array(10);
@@ -72,29 +73,65 @@ function cementSolvedArray() {
     solvedPuzzlePieces[2][i] = bankAvlblPuzzlePieces[3][i].simpleNum;
   }
 
-  //returns true if its a new soln array
-  function doesNotExistYet() {
-    for (let i = 0; i < allSolvedPuzzlePieces.length; i++) {
-      for (let j = 0; j < 10; j++) {
-        if (allSolvedPuzzlePieces[i][0][j] !== solvedPuzzlePieces[0][j]) return true;
-        if (allSolvedPuzzlePieces[i][1][j] !== solvedPuzzlePieces[1][j]) return true;
-      }
-      for (let x = 0; x < 5; x++) {
-        if (allSolvedPuzzlePieces[i][2][x] !== solvedPuzzlePieces[2][x]) return true;
-      }
-    }
-    return false;
-  }
+  //Large solnSubset case 
+  if (solnSubset === 'L') {
+    //returns true if an exact match found ... ie don't push it to allArray
+    function alreadyExists() {
+      outer_loop: for (let i = 0; i < allSolvedPuzzlePiecesLarge.length; i++) {
 
-  if (allSolvedPuzzlePieces.length === 0) {
-    allSolvedPuzzlePieces.push(solvedPuzzlePieces);
-    displayPuzzleHtml();
-  }
-  else if (doesNotExistYet()) {
-    allSolvedPuzzlePieces.push(solvedPuzzlePieces);
-    displayPuzzleHtml();
+        for (let j = 0; j < 10; j++) {
+          if (allSolvedPuzzlePiecesLarge[i][0][j] !== solvedPuzzlePieces[0][j]) continue outer_loop;
+          if (allSolvedPuzzlePiecesLarge[i][1][j] !== solvedPuzzlePieces[1][j]) continue outer_loop;
+
+          if (j < 5) {
+            if (allSolvedPuzzlePiecesLarge[i][2][j] !== solvedPuzzlePieces[2][j]) continue outer_loop;
+          }
+        }
+        return true;
+      }
     }
-}
+
+    if (allSolvedPuzzlePiecesLarge.length === 0) {
+      console.log('     perfect fit!');
+      allSolvedPuzzlePiecesLarge.push(solvedPuzzlePieces);
+      //displayPuzzleHtml();
+    }
+    else if (!alreadyExists()) {
+      console.log('     perfect fit!');
+      allSolvedPuzzlePiecesLarge.push(solvedPuzzlePieces);
+      //displayPuzzleHtml();
+    }
+  }
+  //small subset case (default)
+  else {
+    //returns true if an exact match found ... ie don't push it to allArray
+    function alreadyExists() {
+      outer_loop: for (let i = 0; i < allSolvedPuzzlePiecesSmall.length; i++) {
+
+        for (let j = 0; j < 10; j++) {
+          if (allSolvedPuzzlePiecesSmall[i][0][j] !== solvedPuzzlePieces[0][j]) continue outer_loop;
+          if (allSolvedPuzzlePiecesSmall[i][1][j] !== solvedPuzzlePieces[1][j]) continue outer_loop;
+
+          if (j < 5) {
+            if (allSolvedPuzzlePiecesSmall[i][2][j] !== solvedPuzzlePieces[2][j]) continue outer_loop;
+          }
+        }
+        return true;
+      }
+    }
+
+    if (allSolvedPuzzlePiecesSmall.length === 0) {
+      console.log('     perfect fit!');
+      allSolvedPuzzlePiecesSmall.push(solvedPuzzlePieces);
+      //displayPuzzleHtml();
+    }
+    else if (!alreadyExists()) {
+      console.log('     perfect fit!');
+      allSolvedPuzzlePiecesSmall.push(solvedPuzzlePieces);
+      //displayPuzzleHtml();
+    }
+  }
+} //end of cementSolvedArray()
 
 function setUpDOMPropertyArr() {
 
@@ -249,14 +286,18 @@ function displayPuzzleHtml() {
 
 //update bankAvlblPP to soln passed in
 //then call displayPuzzleHtml() to update arrPP and HTML
-function displayNewSolutionHtml(solnIndex) {
+function displayNewSolutionHtml(solnIndex, solnSubset) {
+  let solvedArray;
+  if (solnSubset === 'S') solvedArray = allSolvedPuzzlePiecesSmall;
+  else if (solnSubset === 'L') solvedArray = allSolvedPuzzlePiecesLarge;
+
   //row 1
   for (let i = 0; i < 10; i++) {
     //if bankAvlbl piece is already in position, skip to next index
     //if not equal, run through bankAvlbl[] to find match & switch
-    if ((bankAvlblPuzzlePieces[1][i].simpleNum !== allSolvedPuzzlePieces[solnIndex][0][i])) {
+    if ((bankAvlblPuzzlePieces[1][i].simpleNum !== solvedArray[solnIndex][0][i])) {
       for (let j = i; j < 10; j++) {
-        if (bankAvlblPuzzlePieces[1][j].simpleNum === allSolvedPuzzlePieces[solnIndex][0][i]) {
+        if (bankAvlblPuzzlePieces[1][j].simpleNum === solvedArray[solnIndex][0][i]) {
           switchRow(i, j, 1);
         }
       }
@@ -266,9 +307,9 @@ function displayNewSolutionHtml(solnIndex) {
   for (let i = 0; i < 10; i++) {
     //if bankAvlbl piece is already in position, skip to next index
     //if not equal, run through bankAvlbl[] to find match & switch
-    if ((bankAvlblPuzzlePieces[2][i].simpleNum !== allSolvedPuzzlePieces[solnIndex][1][i])) {
+    if ((bankAvlblPuzzlePieces[2][i].simpleNum !== solvedArray[solnIndex][1][i])) {
       for (let j = i; j < 10; j++) {
-        if (bankAvlblPuzzlePieces[2][j].simpleNum === allSolvedPuzzlePieces[solnIndex][1][i]) {
+        if (bankAvlblPuzzlePieces[2][j].simpleNum === solvedArray[solnIndex][1][i]) {
           switchRow(i, j, 2);
         }
       }
@@ -278,9 +319,9 @@ function displayNewSolutionHtml(solnIndex) {
   for (let i = 0; i < 5; i++) {
     //if bankAvlbl piece is already in position, skip to next index
     //if not equal, run through bankAvlbl[] to find match & switch
-    if ((bankAvlblPuzzlePieces[3][i].simpleNum !== allSolvedPuzzlePieces[solnIndex][2][i])) {
+    if ((bankAvlblPuzzlePieces[3][i].simpleNum !== solvedArray[solnIndex][2][i])) {
       for (let j = i; j < 5; j++) {
-        if (bankAvlblPuzzlePieces[3][j].simpleNum === allSolvedPuzzlePieces[solnIndex][2][i]) {
+        if (bankAvlblPuzzlePieces[3][j].simpleNum === solvedArray[solnIndex][2][i]) {
           switchRow(i, j, 3);
         }
       }
@@ -383,7 +424,8 @@ function switchRow(switchSpotIdx, toSwitchInIdx, rowNum) {
 // ADD HTML UPDATE
 
 //takes two numbers and record of current array setup (to reset the bankAvlbl)
-function row1Perm(switchSpot, toSwitchIn, simpleNumArray) {
+//generates larger soln subset - tests all first layer switchIns, even after a match
+function row1PermLarge(switchSpot, toSwitchIn, simpleNumArray, solnSubset = 'L') {
   //console.log('Row1: ' + switchSpot + " <-" + toSwitchIn);
 
   //default set to true - sets false if 1.doesn't fit | 2.no more perms
@@ -418,22 +460,11 @@ function row1Perm(switchSpot, toSwitchIn, simpleNumArray) {
       if (fitsRowOne(9, bankAvlblPuzzlePieces[1][9])) {
         //console.log('      row 1 fits!');
         let simpleNumArray2 = [0,1,2,3,4,5,6,7,8,9];
-        if (row2Perm(0,0,simpleNumArray2)) {
+        if (row2Perm(0,0,simpleNumArray2, solnSubset)) {
           return true;
         }
       }
     }
-  }
-  //on root case, but no fit. Move to next switch immediately
-  else if (switchSpot === 0) {
-    if (toSwitchIn === 9) {
-      //console.log('1 No available pieces, break out');
-    }
-    else {
-      toSwitchIn ++;
-      row1Perm(switchSpot, toSwitchIn, simpleNumArray);
-    }
-    hasAvlblBranches = false;
   }
   else {
     //or breaks out of all future branches/perms
@@ -445,15 +476,78 @@ function row1Perm(switchSpot, toSwitchIn, simpleNumArray) {
     //explore all lower branches
     let newSwitchSpot = switchSpot + 1;
     for (let i = newSwitchSpot; i < 10; i++) {
-     row1Perm(newSwitchSpot, i, simpleNumArray);
+     row1PermLarge(newSwitchSpot, i, simpleNumArray);
     }
   }
-}//end of row1Perm()
+  //make sure to try all toSwitchIns, even if current was not fit
+  if (toSwitchIn !== 9) {
+    toSwitchIn++;
+    row1PermLarge(switchSpot, toSwitchIn, simpleNumArray);
+  }
+}//end of row1PermLarge()
+
+//takes two numbers and record of current array setup (to reset the bankAvlbl)
+//only does first match of layer-1 to make smaller subset of solns
+function row1PermSmall(switchSpot, toSwitchIn, simpleNumArray, solnSubset = 'S') {
+  //console.log('Row1: ' + switchSpot + " <-" + toSwitchIn);
+
+  //default set to true - sets false if 1.doesn't fit | 2.no more perms
+  let hasAvlblBranches = true;
+
+  //reset bankAvlblPuzzlePieces[] to match simpleNumArray
+  for (let i = 0; i < 10; i++) {
+    //if bankAvlbl piece is already in position, skip to next index
+    //if not equal, run through bankAvlbl[] to find match & switch
+    if ((bankAvlblPuzzlePieces[1][i].simpleNum !== simpleNumArray[i])) {
+      for (let j = i; j < 10; j++) {
+        if (bankAvlblPuzzlePieces[1][j].simpleNum === simpleNumArray[i]) {
+          switchRow(i, j, 1);
+        }
+      }
+    }
+  }
+
+  //checks if piece actually fits
+  if (fitsRowOne(switchSpot, bankAvlblPuzzlePieces[1][toSwitchIn])) {
+    //checks if switch needs to be made (or already in place)
+    if (switchSpot !== toSwitchIn) {
+      switchRow(switchSpot, toSwitchIn, 1);
+      let holdFirstPlace = simpleNumArray[switchSpot]; 
+      simpleNumArray[switchSpot] = simpleNumArray[toSwitchIn];
+      simpleNumArray[toSwitchIn] = holdFirstPlace;
+    }
+    //if switchSpot < 8, then it will continue branching
+    //if switchSpot == 8, then it will check last cell to see if it's perfect row fit
+    if (switchSpot === 8) {
+      hasAvlblBranches = false;
+      if (fitsRowOne(9, bankAvlblPuzzlePieces[1][9])) {
+        //console.log('      row 1 fits!');
+        let simpleNumArray2 = [0,1,2,3,4,5,6,7,8,9];
+        if (row2Perm(0,0,simpleNumArray2, solnSubset)) {
+          return true;
+        }
+      }
+    }
+  }
+  else {
+    //or breaks out of all future branches/perms
+    //console.log('end of branch');
+    hasAvlblBranches = false;
+  }
+
+  if (hasAvlblBranches) {
+    //explore all lower branches
+    let newSwitchSpot = switchSpot + 1;
+    for (let i = newSwitchSpot; i < 10; i++) {
+     row1PermSmall(newSwitchSpot, i, simpleNumArray);
+    }
+  }
+}//end of row1PermSmall()
 
 //****************** */
 
 //takes two numbers and record of current array setup (to reset the bankAvlbl)
-function row2Perm(switchSpot, toSwitchIn, simpleNumArray) {
+function row2Perm(switchSpot, toSwitchIn, simpleNumArray, solnSubset) {
   //console.log('Row2: ' + switchSpot + " <-" + toSwitchIn);
 
   //default set to true - sets false if 1.doesn't fit | 2.no more perms
@@ -488,7 +582,7 @@ function row2Perm(switchSpot, toSwitchIn, simpleNumArray) {
       if (fitsRowTwo(9, bankAvlblPuzzlePieces[2][9])) {
         //console.log('     row 2 fits!');
         let simpleNumArray3 = [0,1,2,3,4];
-        if (row3Perm(0,0,simpleNumArray3)) {
+        if (row3Perm(0,0,simpleNumArray3, solnSubset)) {
           return true;
         }
       }
@@ -501,7 +595,7 @@ function row2Perm(switchSpot, toSwitchIn, simpleNumArray) {
     }
     else {
       toSwitchIn ++;
-      row2Perm(switchSpot, toSwitchIn, simpleNumArray);
+      row2Perm(switchSpot, toSwitchIn, simpleNumArray, solnSubset);
     }
     hasAvlblBranches = false;
   }
@@ -515,18 +609,24 @@ function row2Perm(switchSpot, toSwitchIn, simpleNumArray) {
     //explore all lower branches
     let newSwitchSpot = switchSpot + 1;
     for (let i = newSwitchSpot; i < 10; i++) {
-     row2Perm(newSwitchSpot, i, simpleNumArray);
+     row2Perm(newSwitchSpot, i, simpleNumArray, solnSubset);
     }
   }
+  /*
+  //make sure to try all toSwitchIns, even if current was not fit
+  if (toSwitchIn !== 9) {
+    toSwitchIn++;
+    row1Perm(switchSpot, toSwitchIn, simpleNumArray);
+  }
+  */
 }//end of row2Perm()
-
 
 
 //******************************* */
 
 //just perm all Row 3 
 //takes two numbers
-function row3Perm(switchSpot, toSwitchIn, simpleNumArray) {
+function row3Perm(switchSpot, toSwitchIn, simpleNumArray, solnSubset) {
   //console.log(switchSpot + " <--" + toSwitchIn);
 
   //default set to true - sets false if 1.doesn't fit | 2.no more perms
@@ -559,8 +659,8 @@ function row3Perm(switchSpot, toSwitchIn, simpleNumArray) {
     if (switchSpot === 3) {
       hasAvlblBranches = false;
       if (fitsRowThree(4, bankAvlblPuzzlePieces[3][4])) {
-        console.log('     perfect fit!');
-        cementSolvedArray();
+        //console.log('     perfect fit!');
+        cementSolvedArray(solnSubset);
         return true;
       }
     }
@@ -572,7 +672,7 @@ function row3Perm(switchSpot, toSwitchIn, simpleNumArray) {
     }
     else {
       toSwitchIn ++;
-      row3Perm(switchSpot, toSwitchIn, simpleNumArray);
+      row3Perm(switchSpot, toSwitchIn, simpleNumArray, solnSubset);
     }
     hasAvlblBranches = false;
   }
@@ -588,7 +688,7 @@ function row3Perm(switchSpot, toSwitchIn, simpleNumArray) {
     let newSwitchSpot = switchSpot + 1;
     for (let i = newSwitchSpot; i < 5; i++) {
       //only returns true if perfect fit
-     if (row3Perm(newSwitchSpot, i, simpleNumArray)) {
+     if (row3Perm(newSwitchSpot, i, simpleNumArray, solnSubset)) {
       return true;
      }
     }
@@ -596,11 +696,25 @@ function row3Perm(switchSpot, toSwitchIn, simpleNumArray) {
 }//end of row3Perm()
 
 
-//HTML and eventHandlers Section
-function setUpButtons() {
+//HTML Buttons and eventHandlers Section
+// creates drop-down menu for current solnSubset
+function setUpButtons(solnSubset) {
+
+  let solvedArray;
+  if (solnSubset === 'S') solvedArray = allSolvedPuzzlePiecesSmall;
+  else if (solnSubset === 'L') solvedArray = allSolvedPuzzlePiecesLarge;
+
+  console.log('    ' + solnSubset);
 
   const selectButton = document.getElementById('soln-number');
-  for (let i = 0; i < allSolvedPuzzlePieces.length; i++) {
+  const childrenLength = selectButton.children.length;
+  //delete previous option values
+  for (let i = 0; i < childrenLength; i++) {
+    selectButton.lastChild.remove();
+  }
+
+  //add new option values
+  for (let i = 0; i < solvedArray.length; i++) {
     let option = document.createElement('option');
     option.setAttribute('value', i);
     option.textContent = i;
@@ -609,24 +723,67 @@ function setUpButtons() {
 
   selectButton.onchange = function() {
     const solutionNum = selectButton.value;
-    displayNewSolutionHtml(solutionNum);
+    displayNewSolutionHtml(solutionNum, solnSubset);
   };
 }
 
+//control panel
+function setUpControlPanel() {
 
-//TESTING Section: 
-/* 
-NOTE: 
-- cementSolvedArray() has a duplicate problem; couldnt solve it 
-*/
+  const solnButtBlock = document.getElementById('soln-generator');
+  const smallSolnSubset = document.getElementById("generate-small");
+  smallSolnSubset.addEventListener('click', function() {
+
+    let simpleNumArray = [0,1,2,3,4,5,6,7,8,9];
+    console.log('STARTED small');
+    row1PermSmall(0, 0, simpleNumArray);
+    console.log('COMPLETED small');
+    //setUpButtons('S');
+
+    smallSolnSubset.remove();
+    document.getElementById('small-soln').removeAttribute('disabled');
+    //document.getElementById('small-soln').setAttribute('checked', '');
+
+    //checks if other button has already been popped ... if so. delete whole div
+    if (solnButtBlock.children.length === 0) {
+      solnButtBlock.remove();
+    }
+  })
+
+  const largeSolnSubset = document.getElementById("generate-large");
+  largeSolnSubset.addEventListener('click', function() {
+
+    if (confirm('Are you sure? Generating the large subset could take up to 2 minutes.\n(Note: If your browser says the page is unresponsive, click "wait" and eventually it should load.)')) {
+      let simpleNumArray = [0,1,2,3,4,5,6,7,8,9];
+      console.log('STARTED large');
+      row1PermLarge(0, 0, simpleNumArray);
+      console.log('COMPLETED large');
+      //setUpButtons('L');
+
+      largeSolnSubset.remove();
+      document.getElementById('large-soln').removeAttribute('disabled');
+      //document.getElementById('large-soln').setAttribute('checked', '');
+
+      //checks if other button has already been popped ... if so. delete whole div
+      if (solnButtBlock.children[1].children.length === 0) {
+        solnButtBlock.remove();
+      }
+    }
+  })
+
+  //radio buttons (switches solnSubset)
+  const radioSubsetSmall = document.getElementById("small-soln");
+  radioSubsetSmall.addEventListener('change', function() {
+    setUpButtons(radioSubsetSmall.value);
+  })
+  const radioSubsetLarge = document.getElementById("large-soln");
+  radioSubsetLarge.addEventListener('change', function() {
+    setUpButtons(radioSubsetLarge.value);
+  })
+
+}
 
 setUpDOMPropertyArr();
 setUpDOMPropertyArrCircle();
-
-console.log('STARTED');
-let simpleNumArray = [0,1,2,3,4,5,6,7,8,9];
-row1Perm(0,0,simpleNumArray);
-
-console.log('COMPLETED');
-setUpButtons();
+setUpControlPanel();
 
