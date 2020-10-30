@@ -430,15 +430,15 @@ section.rows-puzzle span{
 
 .G {
   background-color: forestgreen;
-  background-image: url(noise.png);
+  background-image: url(assets/noise.png);
 }
 .P {
-  background-image: url(noise.png);
+  background-image: url(assets/noise.png);
   background-color: rebeccapurple;
 }
 .O {
   background-color: orange;
-  background-image: url(noise.png);
+  background-image: url(assets/noise.png);
 }
 
 /* Row-Specific Styling */
