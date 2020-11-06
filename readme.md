@@ -2,6 +2,7 @@
 
 ## Background ##
 
+<img src="assets/puzzle-physical-whole.jpg" alt="a picture of the real puzzle, bg white" height="250px">
 <img src="assets/puzzle-physical-white.jpg" alt="a picture of the real puzzle, bg white" height="250px">
 
 
