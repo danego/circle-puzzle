@@ -3,9 +3,9 @@
 let arrPuzzlePieces = new Array(4);
 arrPuzzlePieces[0] = ['G', 'G', 'G', 'P', 'P', 'P', 'G', 'G', 'P', 'P'];
 arrPuzzlePieces[1] = [
-  {top:'G', left:'O', right:'G'},
   {top:'G', left:'P', right:'O'},
   {top:'G', left:'G', right:'P'},
+  {top:'G', left:'O', right:'G'},
   {top:'G', left:'P', right:'P'},
   {top:'G', left:'O', right:'O'},
   {top:'P', left:'P', right:'O'},
@@ -38,9 +38,9 @@ arrPuzzlePieces[3] = [
 let bankAvlblPuzzlePieces = new Array(4);
 bankAvlblPuzzlePieces[0] = [];
 bankAvlblPuzzlePieces[1] = [
-  {top:'G', left:'O', right:'G', simpleNum: 0},
-  {top:'G', left:'P', right:'O', simpleNum: 1},
-  {top:'G', left:'G', right:'P', simpleNum: 2},
+  {top:'G', left:'P', right:'O', simpleNum: 0},
+  {top:'G', left:'G', right:'P', simpleNum: 1},
+  {top:'G', left:'O', right:'G', simpleNum: 2},
   {top:'G', left:'P', right:'P', simpleNum: 3},
   {top:'G', left:'O', right:'O', simpleNum: 4},
   {top:'P', left:'P', right:'O', simpleNum: 5},
@@ -418,14 +418,7 @@ function row1Perm(switchSpot, toSwitchIn, simpleNumArray) {
     }
   }
 
-  //Call row1Perm to try ALL pieces in the current switchSpot
-  //regardless of current match or not
-  if (switchSpot === 0 && toSwitchIn === 0) {
-    let newSwitchSpot = switchSpot;
-    for (let i = switchSpot + 1; i < 10; i++) {
-      row1Perm(switchSpot, i, [...simpleNumArray]);
-    }
-  }
+  
 
   //checks if piece actually fits
   if (fitsRowOne(switchSpot, bankAvlblPuzzlePieces[1][toSwitchIn])) {
@@ -458,6 +451,13 @@ function row1Perm(switchSpot, toSwitchIn, simpleNumArray) {
     let newSwitchSpot = switchSpot + 1;
     for (let i = newSwitchSpot; i < 10; i++) {
       row1Perm(newSwitchSpot, i, [...simpleNumArray]);
+    }
+  }
+  //Call row1Perm to try ALL pieces in the current switchSpot
+  //regardless of current match or not
+  if (switchSpot === 0 && toSwitchIn === 0) { 
+    for (let i = switchSpot + 1; i < 10; i++) {
+      row1Perm(switchSpot, i, [...simpleNumArray]);
     }
   }
 }//end of row1Perm()
